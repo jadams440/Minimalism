@@ -44,6 +44,10 @@
                     this.map[y].push(newMap.tiles[y][x]);
                 }
             }
+        },
+
+        toggleColors: function(startTile) {
+            console.log("toggle colors starting at " + startTile);
         }
     };
 

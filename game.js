@@ -5,6 +5,7 @@
         level: mn.level,
         players: [],
         playerFocus: [],
+        focussedPlayer: null,
 
         init: function() {
             this.players = [];
@@ -13,6 +14,7 @@
             this.players.push(yellowPlayer);
             this.players[0].init([0, 0, 16, 25]);
             this.playerFocus.push(true);
+            this.focussedPlayer = 0;
             var redPlayer = new mn.Player(1);
             this.players.push(redPlayer);
             this.players[1].init([0, 25, 16, 25]);
@@ -42,6 +44,9 @@
             if (mn.input.wasPressed(32)) {
                 this.changeFocus();
             }
+            if (mn.input.wasPressed(40)) {
+                this.level.toggleColors(this.players[this.focussedPlayer].getTile());
+            }
             this.players[0].update(this.playerFocus[0]);
             this.players[1].update(this.playerFocus[1]);
             this.players[2].update(this.playerFocus[2]);
@@ -51,12 +56,15 @@
             if (this.playerFocus[0] === true) {
                 this.playerFocus[0] = false;
                 this.playerFocus[1] = true;
+                this.focussedPlayer = 1;
             } else if (this.playerFocus[1] === true) {
                 this.playerFocus[1] = false;
                 this.playerFocus[2] = true;
+                this.focussedPlayer = 2;
             } else if (this.playerFocus[2] = true) {
                 this.playerFocus[2] = false;
                 this.playerFocus[0] = true;
+                this.focussedPlayer = 3;
             }
         }
     }

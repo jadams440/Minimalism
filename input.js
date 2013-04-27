@@ -2,7 +2,7 @@
 
     mn.input = {
         moveKeys: [37, 38, 39],
-        passiveKeys: [32],
+        passiveKeys: [32, 40],
 
         pressed: {},
 

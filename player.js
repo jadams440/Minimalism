@@ -158,4 +158,10 @@
         this.y += this.yVel;
     };
 
+    mn.Player.prototype.getTile = function() {
+        var x = Math.floor((this.x + 8) / 16);
+        var y = Math.floor((this.y + 13) / 16);
+        return [x, y];
+    };
+
 }());
