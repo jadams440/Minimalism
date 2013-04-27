@@ -73,6 +73,10 @@
                 this.playerFocus[0] = true;
                 this.focussedPlayer = 0;
             }
+        },
+
+        loadLevel: function(n) {
+            this.level.loadMap(n);
         }
     }
 

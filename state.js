@@ -1,6 +1,7 @@
 (function() {
 
     mn.State = {
+        menu: mn.menuState,
         game: mn.gameState,
         victory: mn.victoryState,
 
@@ -9,7 +10,8 @@
         start: function() {
             this.initInput();
             this.victory.init();
-            this.currentState = this.game;
+            this.menu.init();
+            this.currentState = this.menu;
             this.currentState.enter();
             this.startUpdating();
             this.startRendering();
@@ -36,6 +38,13 @@
         completedLevel: function() {
             this.currentState.exit();
             this.currentState = this.victory;
+            this.currentState.enter();
+        },
+
+        startLevel: function(n) {
+            this.game.loadLevel(n);
+            this.currentState.exit();
+            this.currentState = this.game;
             this.currentState.enter();
         }
 

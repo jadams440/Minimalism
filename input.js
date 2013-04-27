@@ -4,30 +4,29 @@
         moveKeys: [37, 38, 39],
         passiveKeys: [32, 40],
 
-        pressed: {},
+        currenntPressed: {},
+        wasPressed: {},
 
         onKeyDown: function(evt) {
             if (this.moveKeys.indexOf(evt.keyCode) != -1) {
-                this.pressed[evt.keyCode] = true;
+                this.currenntPressed[evt.keyCode] = true;
             }
-            if (this.passiveKeys.indexOf(evt.keyCode) != -1) {
-                this.pressed[evt.keyCode] = true;
-            }
+            this.wasPressed[evt.keyCode] = true;
         },
 
         onKeyUp: function(evt) {
             if (this.moveKeys.indexOf(evt.keyCode) != -1) {
-                this.pressed[evt.keyCode] = false;
+                this.currenntPressed[evt.keyCode] = false;
             }
         },
 
         isPressed: function(keyCode) {
-            return this.pressed[keyCode];
+            return this.currenntPressed[keyCode];
         },
 
         wasPressed: function(keyCode) {
-            if (this.pressed[keyCode]) {
-                this.pressed[keyCode] = false;
+            if (this.wasPressed[keyCode]) {
+                this.wasPressed[keyCode] = false;
                 return true;
             } else {
                 return false;

@@ -22,7 +22,6 @@ window.onload = function () {
     }
 
     function play() {
-        console.log("lets go");
         mn.State.start();
     }
 

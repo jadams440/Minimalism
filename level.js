@@ -8,8 +8,6 @@
         nTotal: 3,
 
         init: function() {
-            this.loadMap(mn.testmap);
-
             // Set the sprites
             this.sprites = [];
             this.sprites.push([0, 0, 16, 16]);
@@ -17,7 +15,6 @@
             this.sprites.push([32, 0, 16, 16]);
             this.sprites.push([48, 0, 16, 16]);
             this.sprites.push([64, 0, 16, 16]);
-
         },
 
         render: function() {
@@ -43,12 +40,12 @@
             }
         },
 
-        loadMap: function(newMap) {
+        loadMap: function(num) {
             this.map = [];
-            for (var y = 0; y < newMap.tileshigh; y++) {
+            for (var y = 0; y < mn.maps[num].tileshigh; y++) {
                 this.map.push([]);
-                for (var x = 0; x < newMap.tileswide; x++) {
-                    this.map[y].push(newMap.tiles[y][x]);
+                for (var x = 0; x < mn.maps[num].tileswide; x++) {
+                    this.map[y].push(mn.maps[num].tiles[y][x]);
                 }
             }
 
