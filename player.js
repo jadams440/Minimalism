@@ -164,4 +164,21 @@
         return [x, y];
     };
 
+   mn.Player.prototype.intersects = function(cX, cY) {
+       var plx = this.x;
+       var prx = this.x + 15;
+       var pty = this.y;
+       var pby = this.y + 24;
+       var clx = cX * 16;
+       var crx = cX * 16 + 16;
+       var cty = cY * 16;
+       var cby = cY * 16 + 25;
+       if ((plx > clx && plx < crx) || (prx > clx && prx < crx)) {
+           if ((pty < cby && pty > cty) || (pby < cby && pby > cty)) {
+               return true;
+           }
+       }
+       return false;
+   }
+
 }());

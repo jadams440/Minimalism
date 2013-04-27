@@ -45,7 +45,9 @@
                 this.changeFocus();
             }
             if (mn.input.wasPressed(40)) {
-                this.level.toggleColors(this.players[this.focussedPlayer].getTile());
+                this.level.toggleColors(this.players[this.focussedPlayer].getTile(),
+                                        this.players[this.focussedPlayer].color
+                );
             }
             this.players[0].update(this.playerFocus[0]);
             this.players[1].update(this.playerFocus[1]);
@@ -64,7 +66,7 @@
             } else if (this.playerFocus[2] = true) {
                 this.playerFocus[2] = false;
                 this.playerFocus[0] = true;
-                this.focussedPlayer = 3;
+                this.focussedPlayer = 0;
             }
         }
     }
