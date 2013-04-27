@@ -1,26 +1,37 @@
 (function() {
 
     mn.input = {
-        LEFT: 37,
-        RIGHT: 39,
-        UP: 38,
+        moveKeys: [37, 38, 39],
+        passiveKeys: [32],
 
-        pressed: {
-            "37": false,
-            "39": false,
-            "38": false
-        },
+        pressed: {},
 
         onKeyDown: function(evt) {
-            this.pressed[evt.keyCode] = true;
+            if (this.moveKeys.indexOf(evt.keyCode) != -1) {
+                this.pressed[evt.keyCode] = true;
+            }
+            if (this.passiveKeys.indexOf(evt.keyCode) != -1) {
+                this.pressed[evt.keyCode] = true;
+            }
         },
 
         onKeyUp: function(evt) {
-            this.pressed[evt.keyCode] = false;
+            if (this.moveKeys.indexOf(evt.keyCode) != -1) {
+                this.pressed[evt.keyCode] = false;
+            }
         },
 
         isPressed: function(keyCode) {
             return this.pressed[keyCode];
+        },
+
+        wasPressed: function(keyCode) {
+            if (this.pressed[keyCode]) {
+                this.pressed[keyCode] = false;
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
