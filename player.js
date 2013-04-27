@@ -61,36 +61,30 @@
             var bletx = Math.floor((this.x + this.xVel) / 16);
             var blsty = Math.floor((this.y + 24) / 16);
             // If moving to the right, check the right side for collisions
-            if (this.xVel > 0) {
-                if (tretx > trstx) {
-                    // Check top right
-                    if (mn.State.game.level.map[trsty][tretx] === this.color ||
-                        mn.State.game.level.map[trsty][tretx] === 4) {
-                        this.xVel = 0;
-                    }
-                    // Check bottom right
-                    if (mn.State.game.level.map[brsty][bretx] === this.color ||
-                        mn.State.game.level.map[brsty][bretx] === 4) {
+            if (tretx > trstx) {
+                // Check every tile we could hit on the right side
+                for (var i = 0; i <= brsty - trsty; i++) {
+                    if (mn.State.game.level.map[trsty + i][tretx] === this.color ||
+                        mn.State.game.level.map[trsty + i][tretx] === 4) {
                         this.xVel = 0;
                     }
                 }
             }
             // If moving to the left, check left side for collisions
-            if (this.xVel < 0) {
-                if (tletx < tlstx) {
-                    // Check top left
-                    if (mn.State.game.level.map[tlsty][tletx] === this.color ||
-                        mn.State.game.level.map[tlsty][tletx] === 4) {
-                        this.xVel = 0;
-                    }
-                    // Check bottom left
-                    if (mn.State.game.level.map[blsty][bletx] === this.color ||
-                        mn.State.game.level.map[blsty][bletx] === 4) {
+            if (tletx < tlstx) {
+                // Check every tile we could hit on the left side
+                for (var i = 0; i <= blsty - tlsty; i++) {
+                    if (mn.State.game.level.map[tlsty + i][tletx] === this.color ||
+                        mn.State.game.level.map[tlsty + i][tletx] === 4) {
                         this.xVel = 0;
                     }
                 }
             }
             // Recalculate the y positions
+            if (this.y + 25 + this.yVel >= 592) {
+                this.x = 0;
+                this.y = 0;
+            }
             var trsty = Math.floor((this.y) / 16);
             var trety = Math.floor((this.y + this.yVel) / 16);
             var brsty = Math.floor((this.y + 24) / 16);
