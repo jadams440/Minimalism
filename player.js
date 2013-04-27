@@ -9,6 +9,7 @@
         sprites: [],
         xVel: 16,
         yVel: 0,
+        onGround: false,
 
         init: function() {
             this.sprite = mn.settings.sprites[1];
@@ -39,9 +40,16 @@
             } else {
                 this.xVel = 0;
             }
+            if (mn.input.isPressed(38) && this.onGround) {
+                this.yVel = -10;
+                this.onGround = false;
+            }
 
             // Gravity
-            this.yVel = 2;
+            this.yVel += 1;
+            if (this.yVel > 5) {
+                this.yVel = 5;
+            }
 
             // Collisions
             // Top right
@@ -100,11 +108,13 @@
                     if (mn.State.game.level.map[blety][bletx] === this.color ||
                         mn.State.game.level.map[blety][bletx] === 4) {
                         this.yVel = 0;
+                        this.onGround = true;
                     }
                     // Check bottom right
                     if (mn.State.game.level.map[brety][bretx] === this.color ||
                         mn.State.game.level.map[brety][bretx] === 4) {
                         this.yVel = 0;
+                        this.onGround = true;
                     }
                 }
             }
