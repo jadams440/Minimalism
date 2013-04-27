@@ -23,10 +23,7 @@ window.onload = function () {
 
     function play() {
         console.log("lets go");
-        mn.level.init();
-        mn.player.init();
-        mn.level.render();
-        mn.player.render();
+        mn.State.start();
     }
 
     loadSprites();
