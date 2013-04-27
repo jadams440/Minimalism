@@ -28,4 +28,19 @@
         );
     };
 
+    mn.Door.prototype.atExit = function(x, y, c) {
+        if (c != this.color) {
+            return false;
+        }
+        var lx = this.x;
+        var rx = this.x + 16;
+        var ty = this.y;
+        var by = this.y + 32;
+        if ((x > lx && x < rx) && (y < by && y > ty)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }());

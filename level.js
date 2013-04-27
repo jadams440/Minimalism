@@ -61,6 +61,15 @@
             this.doors.push(newDoor);
         },
 
+        atExit: function(x, y, c) {
+            for (var i = 0; i < this.doors.length; i++) {
+                if (this.doors[i].atExit(x, y, c)) {
+                    return true;
+                }
+            }
+            return false;
+        },
+
         toggleColors: function(startTile, pColor) {
             var cColor = this.map[startTile[1]][startTile[0]];
             if (cColor >= 3) {

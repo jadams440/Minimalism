@@ -156,6 +156,11 @@
 
         this.x += this.xVel;
         this.y += this.yVel;
+
+        // Are we at an exit door?
+        if (mn.State.game.level.atExit(this.x + 8, this.y + 16, this.color)) {
+            console.log("done");
+        }
     };
 
     mn.Player.prototype.getTile = function() {
