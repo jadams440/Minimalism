@@ -6,4 +6,15 @@ window.onload = function () {
     mn.settings.canvas.height = mn.settings.canvasHeight;
     mn.settings.ctx = mn.settings.canvas.getContext("2d");
 
+    // Load everything here and just wait until its loaded
+    mn.tileset = new Image();
+    mn.tileset.src = 'assets/tileset.png';
+    mn.tileset.onload = play();
+
+    function play() {
+        console.log("lets go");
+        mn.level.init();
+        mn.level.render();
+    }
+
 };
