@@ -29,11 +29,12 @@
         },
 
         update: function() {
-            if (this.x + 16 >= mn.settings.canvasWidth) {
+            if (mn.input.isPressed(37)) {
                 this.xVel = -16;
-            }
-            if (this.x - 16 < 0) {
+            } else if (mn.input.isPressed(39)) {
                 this.xVel = 16;
+            } else {
+                this.xVel = 0;
             }
             this.x += this.xVel;
         }

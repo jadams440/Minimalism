@@ -2,21 +2,21 @@
 
     mn.input = {
         LEFT: 37,
-        RIGHT: 38,
+        RIGHT: 39,
         UP: 38,
 
         pressed: {
-            LEFT: false,
-            RIGHT: false,
-            UP: false
+            "37": false,
+            "39": false,
+            "38": false
         },
 
         onKeyDown: function(evt) {
-            this.isPressed[evt.keyCode] = true;
+            this.pressed[evt.keyCode] = true;
         },
 
         onKeyUp: function(evt) {
-            this.isPressed[evt.keyCode] = false;
+            this.pressed[evt.keyCode] = false;
         },
 
         isPressed: function(keyCode) {

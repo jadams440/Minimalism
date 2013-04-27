@@ -13,7 +13,7 @@ var mn = mn || {};
         canvasWidth: 800,
 
         // Update interval
-        interval: 1000,
+        interval: 100,
 
         // Sprite settings
         tileSize: 16,
