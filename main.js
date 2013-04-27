@@ -7,14 +7,28 @@ window.onload = function () {
     mn.settings.ctx = mn.settings.canvas.getContext("2d");
 
     // Load everything here and just wait until its loaded
-    mn.tileset = new Image();
-    mn.tileset.src = 'assets/tileset.png';
-    mn.tileset.onload = play();
+    function loadSprites() {
+        var remaining = mn.settings.nToLoad;
+        for (var i = 0; i < mn.settings.nToLoad; i++) {
+            mn.settings.sprites[i] = new Image();
+            mn.settings.sprites[i].src = mn.settings.toLoad[i];
+            mn.settings.sprites[i].onload = function() {
+                remaining--;
+                if (remaining <= 0) {
+                    play();
+                }
+            }
+        }
+    }
 
     function play() {
         console.log("lets go");
         mn.level.init();
+        mn.player.init();
         mn.level.render();
+        mn.player.render();
     }
+
+    loadSprites();
 
 };

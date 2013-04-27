@@ -22,7 +22,7 @@
                     var i = this.map[y][x];
                     var xPos = x * mn.settings.tileSize;
                     var yPos = y * mn.settings.tileSize;
-                    mn.settings.ctx.drawImage(mn.tileset,
+                    mn.settings.ctx.drawImage(mn.settings.sprites[0],
                                               this.sprites[i][0],
                                               this.sprites[i][1],
                                               this.sprites[i][2],

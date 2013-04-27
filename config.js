@@ -15,8 +15,14 @@ var mn = mn || {};
         // Update interval
         interval: 1000,
 
-        // Map settings
-        tileSize: 16
+        // Sprite settings
+        tileSize: 16,
+        nToLoad: 2,
+        sprites: [],
+        toLoad: [
+            "assets/tileset.png",
+            "assets/player.png"
+        ]
 
     };
 
