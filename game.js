@@ -14,7 +14,6 @@
         },
 
         enter: function() {
-            console.log("entering game");
             this.init();
         },
 
