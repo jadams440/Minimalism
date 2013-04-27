@@ -3,6 +3,7 @@
     mn.level = {
 
         map: [],
+        doors: [],
 
         init: function() {
             this.loadMap(mn.testmap);
@@ -14,6 +15,7 @@
             this.sprites.push([32, 0, 16, 16]);
             this.sprites.push([48, 0, 16, 16]);
             this.sprites.push([64, 0, 16, 16]);
+
         },
 
         render: function() {
@@ -33,6 +35,9 @@
                                               mn.settings.tileSize
                     )
                 }
+            };
+            for (var i = 0; i < this.doors.length; i++) {
+                this.doors[i].render();
             }
         },
 
@@ -44,6 +49,16 @@
                     this.map[y].push(newMap.tiles[y][x]);
                 }
             }
+
+            var newDoor = new mn.Door(49 * 16, 13 * 16, 0);
+            newDoor.init();
+            this.doors.push(newDoor);
+            newDoor = new mn.Door(48 * 16, 13 * 16, 1);
+            newDoor.init();
+            this.doors.push(newDoor);
+            newDoor = new mn.Door(47 * 16, 13 * 16, 2);
+            newDoor.init();
+            this.doors.push(newDoor);
         },
 
         toggleColors: function(startTile, pColor) {

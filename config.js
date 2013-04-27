@@ -17,12 +17,13 @@ var mn = mn || {};
 
         // Sprite settings
         tileSize: 16,
-        nToLoad: 3,
+        nToLoad: 4,
         sprites: [],
         toLoad: [
             "assets/tileset.png",
             "assets/player.png",
-            "assets/marker.png"
+            "assets/marker.png",
+            "assets/door.png"
         ]
 
     };
