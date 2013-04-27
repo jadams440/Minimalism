@@ -24,6 +24,10 @@
         render: function() {
             this.level.render();
             this.players[0].render();
+        },
+
+        update: function() {
+            this.players[0].update();
         }
     }
 

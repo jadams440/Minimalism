@@ -9,16 +9,26 @@
             this.initInput();
             this.currentState = this.game;
             this.currentState.enter();
-            this.render();
+            this.startUpdating();
+            this.startRendering();
         },
 
-        render: function() {
-            this.currentState.render();
+        startRendering: function() {
+            window.requestAnimFrame(mn.State.startRendering);
+            mn.State.currentState.render();
         },
 
         initInput: function() {
             window.addEventListener('keydown', function(evt) {mn.input.onKeyDown(evt);}, false);
             window.addEventListener('keyup', function(evt) {mn.input.onKeyUp(evt);}, false);
+        },
+
+        startUpdating: function() {
+            mn.State.intervalID = setInterval(mn.State.update, mn.settings.interval);
+        },
+
+        update: function() {
+            mn.State.currentState.update();
         }
 
     }
