@@ -3,7 +3,7 @@
     mn.Player = function(c) {
 
         this.color = c;
-        this.x = 0;
+        this.x = c * 16;
         this.y = 16 * 15 - 25;
         this.spritePos = null;
         this.sprites = [];
@@ -156,12 +156,15 @@
 
         this.x += this.xVel;
         this.y += this.yVel;
-
-        // Are we at an exit door?
-        if (mn.State.game.level.atExit(this.x + 8, this.y + 16, this.color)) {
-            console.log("done");
-        }
     };
+
+    mn.Player.prototype.atExit = function() {
+        if (mn.State.game.level.atExit(this.x + 8, this.y + 16, this.color)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     mn.Player.prototype.getTile = function() {
         var x = Math.floor((this.x + 8) / 16);

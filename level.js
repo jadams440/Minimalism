@@ -4,6 +4,8 @@
 
         map: [],
         doors: [],
+        nAtExit: 0,
+        nTotal: 3,
 
         init: function() {
             this.loadMap(mn.testmap);

@@ -52,6 +52,11 @@
             this.players[0].update(this.playerFocus[0]);
             this.players[1].update(this.playerFocus[1]);
             this.players[2].update(this.playerFocus[2]);
+
+            // Are all the players at their exits
+            if (this.players[0].atExit() && this.players[1].atExit() && this.players[2].atExit()) {
+                mn.State.completedLevel();
+            }
         },
 
         changeFocus: function() {

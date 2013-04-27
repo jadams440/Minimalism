@@ -2,11 +2,13 @@
 
     mn.State = {
         game: mn.gameState,
+        victory: mn.victoryState,
 
         currentState: null,
 
         start: function() {
             this.initInput();
+            this.victory.init();
             this.currentState = this.game;
             this.currentState.enter();
             this.startUpdating();
@@ -29,6 +31,12 @@
 
         update: function() {
             mn.State.currentState.update();
+        },
+
+        completedLevel: function() {
+            this.currentState.exit();
+            this.currentState = this.victory;
+            this.currentState.enter();
         }
 
     }
