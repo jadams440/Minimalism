@@ -160,7 +160,19 @@
         }
 
         this.x += this.xVel;
+        if (this.x + 16 > 800) {
+            this.x = 800 - 16;
+        }
+        if (this.x < 0) {
+            this.x = 0;
+        }
         this.y += this.yVel;
+        if (this.y + 25 > 592) {
+            this.y = 592 - 25;
+        }
+        if (this.y < 0) {
+            this.y = 0;
+        }
     };
 
     mn.Player.prototype.atExit = function() {
