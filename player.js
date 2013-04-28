@@ -94,6 +94,7 @@
             for (var i = 0; i <= brsty - trsty; i++) {
                 if (mn.State.game.level.map[trsty + i][tretx] === this.color ||
                     mn.State.game.level.map[trsty + i][tretx] === 4) {
+                    this.x = tretx * 16 - 1;
                     this.xVel = 0;
                 }
             }
@@ -104,6 +105,7 @@
             for (var i = 0; i <= blsty - tlsty; i++) {
                 if (mn.State.game.level.map[tlsty + i][tletx] === this.color ||
                     mn.State.game.level.map[tlsty + i][tletx] === 4) {
+                    this.x = tretx * 16 + 16 + 1;
                     this.xVel = 0;
                 }
             }
@@ -127,11 +129,13 @@
                 if (mn.State.game.level.map[blety][bletx] === this.color ||
                     mn.State.game.level.map[blety][bletx] === 4) {
                     this.yVel = 0;
+                    this.y = blety * 16 - 1 - 25;
                     this.onGround = true;
                 }
                 // Check bottom right
                 if (mn.State.game.level.map[brety][bretx] === this.color ||
                     mn.State.game.level.map[brety][bretx] === 4) {
+                    this.y = blety * 16 - 25;
                     this.yVel = 0;
                     this.onGround = true;
                 }
@@ -144,11 +148,13 @@
                 if (mn.State.game.level.map[tlety][tletx] === this.color ||
                     mn.State.game.level.map[tlety][tletx] === 4) {
                     this.yVel = 0;
+                    this.y = tlety * 16 + 16 + 1;
                 }
                 // Check top right
                 if (mn.State.game.level.map[trety][tretx] === this.color ||
                     mn.State.game.level.map[trety][tretx] === 4) {
                     this.yVel = 0;
+                    this.y = tlety * 16 + 16 + 1;
                 }
             }
         }
@@ -172,6 +178,7 @@
     };
 
    mn.Player.prototype.intersects = function(cX, cY) {
+
        var plx = this.x;
        var prx = this.x + 15;
        var pty = this.y;
@@ -179,9 +186,10 @@
        var clx = cX * 16;
        var crx = cX * 16 + 16;
        var cty = cY * 16;
-       var cby = cY * 16 + 25;
+       var cby = cY * 16 + 16;
        if ((plx > clx && plx < crx) || (prx > clx && prx < crx)) {
            if ((pty < cby && pty > cty) || (pby < cby && pby > cty)) {
+               console.log(this.color, this.x, this.y, cX * 16, cY * 16);
                return true;
            }
        }

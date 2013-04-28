@@ -165,6 +165,7 @@
                 }
             }
             if (collision) {
+                console.log("collision", nColor);
                 for (var i = 0; i < updatedTiles.length; i++) {
                     this.map[updatedTiles[i][1]][updatedTiles[i][0]] = cColor;
                 }
