@@ -49,7 +49,7 @@
             for (var i = 0; i < mn.maps.length; i++) {
                 var x = i % 4;
                 var y = Math.floor(i / 4);
-                if (localStorage.getItem(i.toString()) === "1") {
+                if (localStorage.getItem(i.toString() + ".completed") === "1") {
                     mn.settings.ctx.fillStyle = "black";
                 } else {
                     mn.settings.ctx.fillStyle = "white";
@@ -59,6 +59,25 @@
                                          50,
                                          50
                 );
+            }
+
+            // Level details
+            var highlightedLevel = this.cursorX + this.cursorY * 4;
+            if (localStorage.getItem(highlightedLevel.toString() + ".completed") === "1") {
+                mn.settings.ctx.font = 'bold 12pt Arial';
+                mn.settings.ctx.fillStyle = '#CAD506';
+                mn.settings.ctx.fillText("Fewest color swaps:",
+                                         30,
+                                         70);
+                mn.settings.ctx.fillText(localStorage.getItem(highlightedLevel.toString() + ".changes"),
+                                         240,
+                                         70);
+                mn.settings.ctx.fillText("Fewest remaining colors:",
+                                         30,
+                                         110);
+                mn.settings.ctx.fillText(localStorage.getItem(highlightedLevel.toString() + ".colors"),
+                                         240,
+                                         110);
             }
         },
 
