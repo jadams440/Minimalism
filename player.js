@@ -215,6 +215,8 @@
    },
 
    mn.Player.prototype.respawn = function() {
+       this.drawXSize = this.spritePos[2];
+       this.drawYSize = this.spritePos[3];
        this.x = this.x0;
        this.y = this.y0;
        this.xVel = 0;

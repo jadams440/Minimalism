@@ -30,7 +30,11 @@
         },
 
         enter: function() {
-
+            this.success = false;
+            this.focussedPlayer = 0;
+            this.playerFocus[0] = true;
+            this.playerFocus[1] = false;
+            this.playerFocus[2] = false;
         },
 
         exit: function() {
@@ -68,17 +72,19 @@
                 // Are all the players at their exits
                 if (this.players[0].atExit() && this.players[1].atExit() && this.players[2].atExit()) {
                     this.success = true;
-                    this.playerFocus[0] = 0;
-                    this.playerFocus[1] = 0;
-                    this.playerFocus[2] = 0;
+                    this.playerFocus[0] = false;
+                    this.playerFocus[1] = false;
+                    this.playerFocus[2] = false;
                 }
             } else if (this.success) {
                 this.successTimer -= mn.settings.interval;
                 if (this.successTimer <= 0) {
                     mn.State.completedLevel();
-                }
-                for (var i = 0; i < this.players.length; i++) {
-                    this.players[i].fadeOut(this.successTimer / this.successTime);
+                } else {
+                    for (var i = 0; i < this.players.length; i++) {
+                        var f = Math.sqrt(this.successTimer / this.successTime);
+                        this.players[i].fadeOut(f);
+                    }
                 }
             }
         },

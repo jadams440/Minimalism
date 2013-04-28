@@ -5,13 +5,13 @@
         passiveKeys: [32, 40],
 
         currenntPressed: {},
-        wasPressed: {},
+        hasBeenPressed: {},
 
         onKeyDown: function(evt) {
             if (this.moveKeys.indexOf(evt.keyCode) != -1) {
                 this.currenntPressed[evt.keyCode] = true;
             }
-            this.wasPressed[evt.keyCode] = true;
+            this.hasBeenPressed[evt.keyCode] = true;
         },
 
         onKeyUp: function(evt) {
@@ -25,12 +25,17 @@
         },
 
         wasPressed: function(keyCode) {
-            if (this.wasPressed[keyCode]) {
-                this.wasPressed[keyCode] = false;
+            if (this.hasBeenPressed[keyCode]) {
+                this.hasBeenPressed[keyCode] = false;
                 return true;
             } else {
                 return false;
             }
+        },
+
+        reset: function() {
+            this.currenntPressed = {};
+            this.hasBeenPressed = {};
         }
     }
 

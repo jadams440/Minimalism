@@ -16,6 +16,7 @@
             this.currentState.enter();
             this.startUpdating();
             this.startRendering();
+            mn.input.reset();
         },
 
         startRendering: function() {
@@ -38,13 +39,15 @@
 
         completedLevel: function() {
             this.currentState.exit();
-            this.currentState = this.victory;
+            mn.input.reset();
+            this.currentState = this.menu;
             this.currentState.enter();
         },
 
         startLevel: function(n) {
             this.game.loadLevel(n);
             this.currentState.exit();
+            mn.input.reset();
             this.currentState = this.game;
             this.currentState.enter();
         }

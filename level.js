@@ -43,6 +43,8 @@
         },
 
         loadMap: function(n) {
+            this.nAtExit = 0;
+
             this.n = n;
             this.map = [];
             for (var y = 0; y < mn.maps[n].tileshigh; y++) {
@@ -53,6 +55,7 @@
             }
 
             // Exit doors
+            this.doors = [];
             var newDoor = new mn.Door(mn.maps[n].exit0[0] * 16,
                                       (mn.maps[n].exit0[1] - 1) * 16,
                                       0);
@@ -70,6 +73,7 @@
             this.doors.push(newDoor);
 
             // Spawn points for each color
+            this.spawns = [];
             this.spawns.push(mn.maps[n].spawn0);
             this.spawns.push(mn.maps[n].spawn1);
             this.spawns.push(mn.maps[n].spawn2);
