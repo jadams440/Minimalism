@@ -49,7 +49,11 @@
             for (var i = 0; i < mn.maps.length; i++) {
                 var x = i % 4;
                 var y = Math.floor(i / 4);
-                mn.settings.ctx.fillStyle = "white";
+                if (localStorage.getItem(i.toString()) === "1") {
+                    mn.settings.ctx.fillStyle = "black";
+                } else {
+                    mn.settings.ctx.fillStyle = "white";
+                }
                 mn.settings.ctx.fillRect(355 + x * 100,
                                          50 + y * 100,
                                          50,
