@@ -59,6 +59,7 @@
                         this.players[i].setSpawn(this.level.spawns[i]);
                         this.players[i].respawn();
                     }
+                    this.colorChanges = 0;
                 }
                 if (mn.input.wasPressed(32)) {
                     this.changeFocus();

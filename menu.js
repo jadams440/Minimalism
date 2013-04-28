@@ -65,19 +65,19 @@
             var highlightedLevel = this.cursorX + this.cursorY * 4;
             if (localStorage.getItem(highlightedLevel.toString() + ".completed") === "1") {
                 mn.settings.ctx.font = 'bold 12pt Arial';
-                mn.settings.ctx.fillStyle = '#CAD506';
+                mn.settings.ctx.fillStyle = 'Black';
                 mn.settings.ctx.fillText("Fewest color swaps:",
                                          30,
-                                         70);
+                                         45);
                 mn.settings.ctx.fillText(localStorage.getItem(highlightedLevel.toString() + ".changes"),
                                          240,
-                                         70);
+                                         45);
                 mn.settings.ctx.fillText("Fewest remaining colors:",
                                          30,
-                                         110);
+                                         85);
                 mn.settings.ctx.fillText(localStorage.getItem(highlightedLevel.toString() + ".colors"),
                                          240,
-                                         110);
+                                         85);
             }
         },
 
