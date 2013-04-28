@@ -7,6 +7,7 @@
         spawns: [],
         nAtExit: 0,
         nTotal: 3,
+        n: null,
 
         init: function() {
             // Set the sprites
@@ -42,6 +43,7 @@
         },
 
         loadMap: function(n) {
+            this.n = n;
             this.map = [];
             for (var y = 0; y < mn.maps[n].tileshigh; y++) {
                 this.map.push([]);
@@ -71,6 +73,16 @@
             this.spawns.push(mn.maps[n].spawn0);
             this.spawns.push(mn.maps[n].spawn1);
             this.spawns.push(mn.maps[n].spawn2);
+        },
+
+        resetLevel: function() {
+            this.map = [];
+            for (var y = 0; y < mn.maps[this.n].tileshigh; y++) {
+                this.map.push([]);
+                for (var x = 0; x < mn.maps[this.n].tileswide; x++) {
+                    this.map[y].push(mn.maps[this.n].tiles[y][x]);
+                }
+            }
         },
 
         atExit: function(x, y, c) {

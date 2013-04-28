@@ -189,7 +189,6 @@
        var cby = cY * 16 + 16;
        if ((plx > clx && plx < crx) || (prx > clx && prx < crx)) {
            if ((pty < cby && pty > cty) || (pby < cby && pby > cty)) {
-               console.log(this.color, this.x, this.y, cX * 16, cY * 16);
                return true;
            }
        }

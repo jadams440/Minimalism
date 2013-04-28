@@ -41,6 +41,13 @@
         },
 
         update: function() {
+            if (mn.input.wasPressed(82)) {
+                this.level.resetLevel();
+                for (var i = 0; i < this.players.length; i++) {
+                    this.players[i].setSpawn(this.level.spawns[i]);
+                    this.players[i].respawn();
+                }
+            }
             if (mn.input.wasPressed(32)) {
                 this.changeFocus();
             }
