@@ -68,16 +68,16 @@
                 mn.settings.ctx.fillStyle = 'CAD506';
                 mn.settings.ctx.fillText("Fewest color swaps:",
                                          30,
-                                         45);
+                                         40);
                 mn.settings.ctx.fillText(localStorage.getItem(highlightedLevel.toString() + ".changes"),
                                          240,
-                                         45);
+                                         40);
                 mn.settings.ctx.fillText("Fewest remaining colors:",
                                          30,
-                                         85);
+                                         75);
                 mn.settings.ctx.fillText(localStorage.getItem(highlightedLevel.toString() + ".colors"),
                                          240,
-                                         85);
+                                         75);
             }
         },
 
