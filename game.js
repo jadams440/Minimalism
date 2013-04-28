@@ -6,6 +6,9 @@
         players: [],
         playerFocus: [],
         focussedPlayer: null,
+        success: false,
+        successTime: 1000,
+        successTimer: 1000,
 
         init: function() {
             this.players = [];
@@ -23,6 +26,7 @@
             this.players.push(bluePlayer);
             this.players[2].init([0, 50, 16, 25]);
             this.playerFocus.push(false);
+            this.successTimer = this.successTime;
         },
 
         enter: function() {
@@ -41,28 +45,41 @@
         },
 
         update: function() {
-            if (mn.input.wasPressed(82)) {
-                this.level.resetLevel();
-                for (var i = 0; i < this.players.length; i++) {
-                    this.players[i].setSpawn(this.level.spawns[i]);
-                    this.players[i].respawn();
+            if (!this.success) {
+                if (mn.input.wasPressed(82)) {
+                    this.level.resetLevel();
+                    for (var i = 0; i < this.players.length; i++) {
+                        this.players[i].setSpawn(this.level.spawns[i]);
+                        this.players[i].respawn();
+                    }
                 }
-            }
-            if (mn.input.wasPressed(32)) {
-                this.changeFocus();
-            }
-            if (mn.input.wasPressed(40)) {
-                this.level.toggleColors(this.players[this.focussedPlayer].getTile(),
-                                        this.players[this.focussedPlayer].color
-                );
-            }
-            this.players[0].update(this.playerFocus[0]);
-            this.players[1].update(this.playerFocus[1]);
-            this.players[2].update(this.playerFocus[2]);
+                if (mn.input.wasPressed(32)) {
+                    this.changeFocus();
+                }
+                if (mn.input.wasPressed(40)) {
+                    this.level.toggleColors(this.players[this.focussedPlayer].getTile(),
+                                            this.players[this.focussedPlayer].color
+                    );
+                }
+                this.players[0].update(this.playerFocus[0]);
+                this.players[1].update(this.playerFocus[1]);
+                this.players[2].update(this.playerFocus[2]);
 
-            // Are all the players at their exits
-            if (this.players[0].atExit() && this.players[1].atExit() && this.players[2].atExit()) {
-                mn.State.completedLevel();
+                // Are all the players at their exits
+                if (this.players[0].atExit() && this.players[1].atExit() && this.players[2].atExit()) {
+                    this.success = true;
+                    this.playerFocus[0] = 0;
+                    this.playerFocus[1] = 0;
+                    this.playerFocus[2] = 0;
+                }
+            } else if (this.success) {
+                this.successTimer -= mn.settings.interval;
+                if (this.successTimer <= 0) {
+                    mn.State.completedLevel();
+                }
+                for (var i = 0; i < this.players.length; i++) {
+                    this.players[i].fadeOut(this.successTimer / this.successTime);
+                }
             }
         },
 
@@ -88,6 +105,7 @@
                 this.players[i].setSpawn(this.level.spawns[i]);
                 this.players[i].respawn();
             }
+            this.successTimer = this.successTime;
         }
     }
 

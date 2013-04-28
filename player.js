@@ -16,6 +16,8 @@
     mn.Player.prototype.init = function(spritePos) {
         this.sprite = mn.settings.sprites[1];
         this.spritePos = spritePos;
+        this.drawXSize = this.spritePos[2];
+        this.drawYSize = this.spritePos[3];
         this.marker = mn.settings.sprites[2];
         this.markerPos = [0, 0, 16, 7];
     };
@@ -30,8 +32,8 @@
                                   this.spritePos[3],
                                   xPos,
                                   yPos,
-                                  this.spritePos[2],
-                                  this.spritePos[3]
+                                  this.drawXSize,
+                                  this.drawYSize
         );
         if (inFocus) {
             mn.settings.ctx.drawImage(this.marker,
@@ -217,6 +219,13 @@
        this.y = this.y0;
        this.xVel = 0;
        this.yVel = 0;
+   },
+
+   mn.Player.prototype.fadeOut = function(f) {
+       this.drawXSize = this.drawXSize * f;
+       this.drawYSize = this.drawYSize * f;
+       this.x = this.x + (this.drawXSize * (1 - f)) / 2;
+       this.y = this.y + (this.drawYSize * (1 - f) / 3);
    }
 
 }());
