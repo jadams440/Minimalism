@@ -70,7 +70,6 @@
                     );
                     if (success) {
                         this.colorChanges++;
-                        console.log(this.colorChanges);
                     }
                 }
                 this.players[0].update(this.playerFocus[0]);
