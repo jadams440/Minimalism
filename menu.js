@@ -82,7 +82,7 @@
                 }
             }
             if (mn.input.wasPressed(32)) {
-                mn.State.startLevel(this.cursorX);
+                mn.State.startLevel(this.cursorX + this.cursorY * 4);
             }
 
             this.barX = this.barX + (this.cursorX - this.barX) / 5;
