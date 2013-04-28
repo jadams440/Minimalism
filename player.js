@@ -94,7 +94,7 @@
             for (var i = 0; i <= brsty - trsty; i++) {
                 if (mn.State.game.level.map[trsty + i][tretx] === this.color ||
                     mn.State.game.level.map[trsty + i][tretx] === 4) {
-                    this.x = tretx * 16 - 1;
+                    this.x = tretx * 16 - 16 - 1;
                     this.xVel = 0;
                 }
             }
@@ -105,7 +105,7 @@
             for (var i = 0; i <= blsty - tlsty; i++) {
                 if (mn.State.game.level.map[tlsty + i][tletx] === this.color ||
                     mn.State.game.level.map[tlsty + i][tletx] === 4) {
-                    this.x = tretx * 16 + 16 + 1;
+                    this.x = tretx * 16 + 1;
                     this.xVel = 0;
                 }
             }
@@ -129,7 +129,7 @@
                 if (mn.State.game.level.map[blety][bletx] === this.color ||
                     mn.State.game.level.map[blety][bletx] === 4) {
                     this.yVel = 0;
-                    this.y = blety * 16 - 1 - 25;
+                    this.y = blety * 16 - 25;
                     this.onGround = true;
                 }
                 // Check bottom right
