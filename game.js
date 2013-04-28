@@ -26,7 +26,7 @@
         },
 
         enter: function() {
-            this.init();
+
         },
 
         exit: function() {
@@ -77,6 +77,10 @@
 
         loadLevel: function(n) {
             this.level.loadMap(n);
+            for (var i = 0; i < this.players.length; i++) {
+                this.players[i].setSpawn(this.level.spawns[i]);
+                this.players[i].respawn();
+            }
         }
     }
 

@@ -11,6 +11,7 @@
             this.initInput();
             this.victory.init();
             this.menu.init();
+            this.game.init();
             this.currentState = this.menu;
             this.currentState.enter();
             this.startUpdating();

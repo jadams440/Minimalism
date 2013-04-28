@@ -1,10 +1,10 @@
 (function () {
 
-    mn.Player = function(c) {
+    mn.Player = function(c, x0, y0) {
 
         this.color = c;
         this.x = c * 16;
-        this.y = 16 * 15 - 25;
+        this.y = 0;
         this.spritePos = null;
         this.sprites = [];
         this.xVel = 16;
@@ -110,8 +110,7 @@
         }
         // Recalculate the y positions
         if (this.y + 25 + this.yVel >= 592) {
-            this.x = 0;
-            this.y = 0;
+           this.respawn();
         }
         var trsty = Math.floor((this.y) / 16);
         var trety = Math.floor((this.y + this.yVel) / 16);
@@ -187,6 +186,18 @@
            }
        }
        return false;
+   },
+
+   mn.Player.prototype.setSpawn = function(r) {
+       this.x0 = r[0] * 16;
+       this.y0 = r[1] * 16;
+   },
+
+   mn.Player.prototype.respawn = function() {
+       this.x = this.x0;
+       this.y = this.y0;
+       this.xVel = 0;
+       this.yVel = 0;
    }
 
 }());

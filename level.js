@@ -4,6 +4,7 @@
 
         map: [],
         doors: [],
+        spawns: [],
         nAtExit: 0,
         nTotal: 3,
 
@@ -40,24 +41,36 @@
             }
         },
 
-        loadMap: function(num) {
+        loadMap: function(n) {
             this.map = [];
-            for (var y = 0; y < mn.maps[num].tileshigh; y++) {
+            for (var y = 0; y < mn.maps[n].tileshigh; y++) {
                 this.map.push([]);
-                for (var x = 0; x < mn.maps[num].tileswide; x++) {
-                    this.map[y].push(mn.maps[num].tiles[y][x]);
+                for (var x = 0; x < mn.maps[n].tileswide; x++) {
+                    this.map[y].push(mn.maps[n].tiles[y][x]);
                 }
             }
 
-            var newDoor = new mn.Door(49 * 16, 13 * 16, 0);
+            // Exit doors
+            var newDoor = new mn.Door(mn.maps[n].exit0[0] * 16,
+                                      (mn.maps[n].exit0[1] - 1) * 16,
+                                      0);
             newDoor.init();
             this.doors.push(newDoor);
-            newDoor = new mn.Door(48 * 16, 13 * 16, 1);
+            var newDoor = new mn.Door(mn.maps[n].exit1[0] * 16,
+                                      (mn.maps[n].exit1[1] - 1) * 16,
+                                      1);
             newDoor.init();
             this.doors.push(newDoor);
-            newDoor = new mn.Door(47 * 16, 13 * 16, 2);
+            var newDoor = new mn.Door(mn.maps[n].exit2[0] * 16,
+                                      (mn.maps[n].exit2[1] - 1) * 16,
+                                      2);
             newDoor.init();
             this.doors.push(newDoor);
+
+            // Spawn points for each color
+            this.spawns.push(mn.maps[n].spawn0);
+            this.spawns.push(mn.maps[n].spawn1);
+            this.spawns.push(mn.maps[n].spawn2);
         },
 
         atExit: function(x, y, c) {
