@@ -147,7 +147,7 @@
                     }
                 }
                 // down
-                if (cY < 37) {
+                if (cY < 36) {
                     if (this.map[cY+1][cX] === cColor) {
                         if (mn.State.game.players[nColor].intersects(cX, cY+1)) {
                             collision = true;
