@@ -14,21 +14,127 @@
     <script src="game.js"></script>
     <script src="state.js"></script>
     <script src="main.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,300,700,100' rel='stylesheet' type='text/css'>
 	<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-40534946-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-40534946-1']);
+        _gaq.push(['_trackPageview']);
+    
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <style type="text/css">
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+        #game {
+            display: block;
+            position: absolute;
+            left: 60px;
+            top: 40px;
+        }
+        #infoBox {
+            display: block;
+            position: absolute;
+            padding: 0 20px 20px 20px;
+            font-weight: 300;
+            font-size: 20px;
+            border: 20px solid black;
+        }
+        .controls {
+            left: 40px;
+            top: 692px;
+            width: 200px;
+            height: 290px;
+        }
+        .rules {
+            left: 300px;
+            top: 692px;
+            width: 500px;
+            height: 180px;
+        }
+        .challenges {
+            left: 300px;
+            top: 912px;
+            width: 500px;
+            height: 120px;
+        }
+        .thicker {
+            font-weight: 400;
+        }
+        h1 {
+            font-weight: 400;
+            font-size: 22px;
+            margin: 20px 0 10px 0;
+        }
+        .bline {
+            display:block;
+            position: absolute;
+            background-color: black;
+        }
+        #a1 {
+            left: 0;
+            top: 20px;
+            height: 20px;
+            width: 100%;
+        }
+        #a2 {
+            left: 0;
+            top: 632px;
+            height: 20px;
+            width: 100%;
+        }
+        #a3 {
+            left: 0;
+            top: 692px;
+            height: 20px;
+            width: 100%;
+        }
+        #d1 {
+            left: 40px;
+            top: 0px;
+            height: 100%;
+            width: 20px;
+        }
+        #d2 {
+            left: 860px;
+            top: 0px;
+            height: 100%;
+            width: 20px;
+        }
+    </style>
 </head>
 <body>
+<div id="a1" class="bline"></div>
+<div id="a2" class="bline"></div>
+<div id="a3" class="bline"></div>
+<div id="d1" class="bline"></div>
+<div id="d2" class="bline"></div>
+<div id="infoBox" class="controls">
+    <h1>Game Controls</h1>
+    <span class="thicker">&#8592; &#8594;</span> : Move<br>
+    <span class="thicker">&#8593;</span> : Jump<br>
+    <span class="thicker">&#8595;</span> : Swap color<br>
+    space : Change player<br>
+    r : Reset level
+    <h1>Menu Controls</h1>
+    <span class="thicker">&#8593; &#8595; &#8592; &#8594;</span> : Move cursor<br>
+    space : start level
+</div>
+<div id="infoBox" class="rules">
+    <h1>Rules</h1>
+    &#8226; Guide each player to the corresponding exit<br>
+    &#8226; Each player only reacts to their own color (and black)<br>
+    &#8226; The color behind the current player can only be changed if neither of the others are standing over that block of color
+</div>
+<div id="infoBox" class="challenges">
+    <h1>Challenges</h1>
+    &#8226; Change the colors the fewest times<br>
+    &#8226; Leave the fewest colors remaining
+</div>
 <canvas id="game">Canvas not supported!</canvas>
 </body>
 </html>
