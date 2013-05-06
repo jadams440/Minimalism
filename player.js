@@ -52,14 +52,14 @@
     mn.Player.prototype.update = function(inFocus) {
         // User input
         if (inFocus) {
-            if (mn.input.isPressed(37)) {
+            if (Gamepad.In.isDown.DL) {
                 this.xVel = -4;
-            } else if (mn.input.isPressed(39)) {
+            } else if (Gamepad.In.isDown.DR) {
                 this.xVel = 4;
             } else {
                 this.xVel = 0;
             }
-            if (mn.input.isPressed(38) && this.onGround) {
+            if (Gamepad.In.onDown.A && this.onGround) {
                 this.yVel = -10;
                 this.onGround = false;
             }

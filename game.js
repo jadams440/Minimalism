@@ -53,7 +53,7 @@
 
         update: function() {
             if (!this.success) {
-                if (mn.input.wasPressed(82)) {
+                if (Gamepad.In.onDown.Back) {
                     this.level.resetLevel();
                     for (var i = 0; i < this.players.length; i++) {
                         this.players[i].setSpawn(this.level.spawns[i]);
@@ -61,10 +61,10 @@
                     }
                     this.colorChanges = 0;
                 }
-                if (mn.input.wasPressed(32)) {
+                if (Gamepad.In.onDown.RB || Gamepad.In.onDown.Y) {
                     this.changeFocus();
                 }
-                if (mn.input.wasPressed(40)) {
+                if (Gamepad.In.onDown.B) {
                     var success = this.level.toggleColors(this.players[this.focussedPlayer].getTile(),
                                             this.players[this.focussedPlayer].color
                     );
