@@ -13,7 +13,7 @@
         },
 
         enter: function() {
-
+            mn.settings.setMenuKeyboard();
         },
 
         exit: function() {

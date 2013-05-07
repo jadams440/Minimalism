@@ -38,6 +38,7 @@
             this.playerFocus[0] = true;
             this.playerFocus[1] = false;
             this.playerFocus[2] = false;
+            mn.settings.setGameKeyboard();
         },
 
         exit: function() {

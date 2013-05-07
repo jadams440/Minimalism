@@ -26,8 +26,22 @@ var mn = mn || {};
             "assets/door.png",
             "assets/victory.png",
             "assets/start.png"
-        ]
+        ],
+
+        // Set keyboard controls in gamepad.js
+        setMenuKeyboard: function() {
+            Gamepad.KeyboardMapping.A = 32;     // space to start
+        },
+
+        setGameKeyboard: function() {
+            Gamepad.KeyboardMapping.A = 38;     // up arrow to Jump
+            Gamepad.KeyboardMapping.Back = 82;  // 'r' to reset level
+            Gamepad.KeyboardMapping.B = 40;     // down arrow to swap color
+            Gamepad.KeyboardMapping.Y = 32;     // space to change player
+        }
 
     };
+
+
 
 }());
