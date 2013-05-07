@@ -14,6 +14,10 @@
 
         enter: function() {
             mn.settings.setMenuKeyboard();
+            this.barX = 0;
+            this.barY = 0;
+            this.cursorX = 0;
+            this.cursorY = 0;
         },
 
         exit: function() {
