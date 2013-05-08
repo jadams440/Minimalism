@@ -1,7 +1,7 @@
 (function() {
 
     mn.State = {
-        menu: mn.menuState,
+        menu: mn.menuState(),
         game: mn.gameState,
         victory: mn.victoryState,
 
