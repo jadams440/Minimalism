@@ -15,18 +15,18 @@
         init: function() {
             this.players = [];
             this.level.init();
-            var yellowPlayer = new mn.Player(0);
+            var yellowPlayer = new mn.Player();
             this.players.push(yellowPlayer);
-            this.players[0].init([0, 0, 16, 25]);
+            this.players[0].init(0, [0, 0, 16, 25]);
             this.playerFocus.push(true);
             this.focussedPlayer = 0;
-            var redPlayer = new mn.Player(1);
+            var redPlayer = new mn.Player();
             this.players.push(redPlayer);
-            this.players[1].init([0, 25, 16, 25]);
+            this.players[1].init(1, [0, 25, 16, 25]);
             this.playerFocus.push(false);
-            var bluePlayer = new mn.Player(2);
+            var bluePlayer = new mn.Player();
             this.players.push(bluePlayer);
-            this.players[2].init([0, 50, 16, 25]);
+            this.players[2].init(2, [0, 50, 16, 25]);
             this.playerFocus.push(false);
             this.successTimer = this.successTime;
             this.colorChanges = 0;
@@ -67,7 +67,7 @@
                 }
                 if (Gamepad.In.onDown.B) {
                     var success = this.level.toggleColors(this.players[this.focussedPlayer].getTile(),
-                                            this.players[this.focussedPlayer].color
+                                            this.players[this.focussedPlayer].getColor()
                     );
                     if (success) {
                         this.colorChanges++;
@@ -89,7 +89,7 @@
                     var remColors = [0,0,0];
                     for (var y = 0; y < this.level.map.length; y++) {
                         for (var x = 0; x < this.level.map[0].length; x++) {
-                            for (var i = 0; i < 3; i++) {
+                            for (i = 0; i < 3; i++) {
                                 if (this.level.map[y][x] === i) {
                                     remColors[i] = 1;
                                 }
@@ -111,7 +111,7 @@
                 if (this.successTimer <= 0) {
                     mn.State.completedLevel();
                 } else {
-                    for (var i = 0; i < this.players.length; i++) {
+                    for (i = 0; i < this.players.length; i++) {
                         var f = Math.sqrt(this.successTimer / this.successTime);
                         this.players[i].fadeOut(f);
                     }

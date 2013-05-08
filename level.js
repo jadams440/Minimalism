@@ -103,6 +103,7 @@
             if (cColor >= 3) {
                 return;
             }
+            var nColor;
             if (pColor === 0) {
                 if (cColor === 1) {
                     nColor = 2;

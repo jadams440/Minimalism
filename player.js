@@ -1,233 +1,237 @@
-(function () {
+mn.Player = function () {
 
-    mn.Player = function(c, x0, y0) {
+    var color = 0,
+        x = 0,
+        y = 0,
+        x0 = 0,
+        y0 = 0,
+        spritePos = null,
+        sprite = null,
+        xVel = 16,
+        yVel = 0,
+        drawXSize = 0,
+        drawYSize = 0,
+        markerSprite = null,
+        markerPos = [0, 0, 16, 7],
+        onGround = false;
 
-        this.color = c;
-        this.x = c * 16;
-        this.y = 0;
-        this.spritePos = null;
-        this.sprites = [];
-        this.xVel = 16;
-        this.yVel = 0;
-        this.onGround = false;
+    function init(c, pos) {
+        color = c;
+        sprite = mn.settings.sprites[1];
+        spritePos = pos;
+        drawXSize = spritePos[2];
+        drawYSize = spritePos[3];
+        markerSprite = mn.settings.sprites[2];
+    }
 
-    };
-
-    mn.Player.prototype.init = function(spritePos) {
-        this.sprite = mn.settings.sprites[1];
-        this.spritePos = spritePos;
-        this.drawXSize = this.spritePos[2];
-        this.drawYSize = this.spritePos[3];
-        this.marker = mn.settings.sprites[2];
-        this.markerPos = [0, 0, 16, 7];
-    };
-
-    mn.Player.prototype.render = function(inFocus) {
-        var xPos = this.x;
-        var yPos = this.y;
-        mn.settings.ctx.drawImage(this.sprite,
-                                  this.spritePos[0],
-                                  this.spritePos[1],
-                                  this.spritePos[2],
-                                  this.spritePos[3],
-                                  xPos,
-                                  yPos,
-                                  this.drawXSize,
-                                  this.drawYSize
+    function render(inFocus) {
+        mn.settings.ctx.drawImage(sprite,
+                                  spritePos[0],
+                                  spritePos[1],
+                                  spritePos[2],
+                                  spritePos[3],
+                                  x,
+                                  y,
+                                  drawXSize,
+                                  drawYSize
         );
         if (inFocus) {
-            mn.settings.ctx.drawImage(this.marker,
-                                      this.markerPos[0],
-                                      this.markerPos[1],
-                                      this.markerPos[2],
-                                      this.markerPos[3],
-                                      xPos,
-                                      yPos - this.markerPos[3],
-                                      this.markerPos[2],
-                                      this.markerPos[3]
+            mn.settings.ctx.drawImage(markerSprite,
+                                      markerPos[0],
+                                      markerPos[1],
+                                      markerPos[2],
+                                      markerPos[3],
+                                      x,
+                                      y - markerPos[3],
+                                      markerPos[2],
+                                      markerPos[3]
             )
-        }
-    };
-
-    mn.Player.prototype.update = function(inFocus) {
-        // User input
-        if (inFocus) {
-            if (Gamepad.In.isDown.DL) {
-                this.xVel = -4;
-            } else if (Gamepad.In.isDown.DR) {
-                this.xVel = 4;
-            } else {
-                this.xVel = 0;
-            }
-            if (Gamepad.In.onDown.A && this.onGround) {
-                this.yVel = -10;
-                this.onGround = false;
-            }
-        } else {
-            this.xVel = 0;
-        }
-
-        // Gravity
-        this.yVel += 1;
-        if (this.yVel > 5) {
-            this.yVel = 5;
-        }
-
-        // Collisions
-        // Top right
-        var trstx = Math.floor((this.x + 15) / 16);
-        var tretx = Math.floor((this.x + 15 + this.xVel) / 16);
-        var trsty = Math.floor((this.y) / 16);
-        // Bottom right
-        var brstx = Math.floor((this.x + 15) / 16);
-        var bretx = Math.floor((this.x + 15 + this.xVel) / 16);
-        var brsty = Math.floor((this.y + 24) / 16);
-        // Top left
-        var tlstx = Math.floor((this.x) / 16);
-        var tletx = Math.floor((this.x + this.xVel) / 16);
-        var tlsty = Math.floor((this.y) / 16);
-        // Bottom left
-        var blstx = Math.floor((this.x) / 16);
-        var bletx = Math.floor((this.x + this.xVel) / 16);
-        var blsty = Math.floor((this.y + 24) / 16);
-        // If moving to the right, check the right side for collisions
-        if (tretx > trstx) {
-            // Check every tile we could hit on the right side
-            for (var i = 0; i <= brsty - trsty; i++) {
-                if (mn.State.game.level.map[trsty + i][tretx] === this.color ||
-                    mn.State.game.level.map[trsty + i][tretx] === 4) {
-                    this.x = tretx * 16 - 16 - 1;
-                    this.xVel = 0;
-                }
-            }
-        }
-        // If moving to the left, check left side for collisions
-        if (tletx < tlstx) {
-            // Check every tile we could hit on the left side
-            for (var i = 0; i <= blsty - tlsty; i++) {
-                if (mn.State.game.level.map[tlsty + i][tletx] === this.color ||
-                    mn.State.game.level.map[tlsty + i][tletx] === 4) {
-                    this.x = tretx * 16 + 1;
-                    this.xVel = 0;
-                }
-            }
-        }
-        // Recalculate the y positions
-        if (this.y + 25 + this.yVel >= 592) {
-           this.respawn();
-        }
-        var trsty = Math.floor((this.y) / 16);
-        var trety = Math.floor((this.y + this.yVel) / 16);
-        var brsty = Math.floor((this.y + 24) / 16);
-        var brety = Math.floor((this.y + 24 + this.yVel) / 16);
-        var tlsty = Math.floor((this.y) / 16);
-        var tlety = Math.floor((this.y + this.yVel) / 16);
-        var blsty = Math.floor((this.y + 24) / 16);
-        var blety = Math.floor((this.y + 24 + this.yVel) / 16);
-        // If moving down, check bottom side for collisions
-        if (this.yVel > 0) {
-            if (blety > blsty) {
-                // Check bottom left
-                if (mn.State.game.level.map[blety][bletx] === this.color ||
-                    mn.State.game.level.map[blety][bletx] === 4) {
-                    this.yVel = 0;
-                    this.y = blety * 16 - 25;
-                    this.onGround = true;
-                }
-                // Check bottom right
-                if (mn.State.game.level.map[brety][bretx] === this.color ||
-                    mn.State.game.level.map[brety][bretx] === 4) {
-                    this.y = blety * 16 - 25;
-                    this.yVel = 0;
-                    this.onGround = true;
-                }
-            }
-        }
-        // If moving up, check top for collisions
-        if (this.yVel < 0) {
-            if (blety < blsty) {
-                // Check top left
-                if (mn.State.game.level.map[tlety][tletx] === this.color ||
-                    mn.State.game.level.map[tlety][tletx] === 4) {
-                    this.yVel = 0;
-                    this.y = tlety * 16 + 16 + 1;
-                }
-                // Check top right
-                if (mn.State.game.level.map[trety][tretx] === this.color ||
-                    mn.State.game.level.map[trety][tretx] === 4) {
-                    this.yVel = 0;
-                    this.y = tlety * 16 + 16 + 1;
-                }
-            }
-        }
-
-        this.x += this.xVel;
-        if (this.x + 16 > 800) {
-            this.x = 800 - 16;
-        }
-        if (this.x < 0) {
-            this.x = 0;
-        }
-        this.y += this.yVel;
-        if (this.y + 25 > 592) {
-            this.y = 592 - 25;
-        }
-        if (this.y < 0) {
-            this.y = 0;
-        }
-    };
-
-    mn.Player.prototype.atExit = function() {
-        if (mn.State.game.level.atExit(this.x + 8, this.y + 16, this.color)) {
-            return true;
-        } else {
-            return false;
         }
     }
 
-    mn.Player.prototype.getTile = function() {
-        var x = Math.floor((this.x + 8) / 16);
-        var y = Math.floor((this.y + 13) / 16);
-        return [x, y];
-    };
+    function updateVelocities(inFocus) {
+        if (inFocus) {
+            if (Gamepad.In.isDown.DL) {
+                xVel = -4;
+            } else if (Gamepad.In.isDown.DR) {
+                xVel = 4;
+            } else {
+                xVel = 0;
+            }
+            if (Gamepad.In.onDown.A && onGround) {
+                yVel = -10;
+                onGround = false;
+            }
+        } else {
+            xVel = 0;
+        }
 
-   mn.Player.prototype.intersects = function(cX, cY) {
+        // Apply Gravity
+        yVel += 1;
+        if (yVel > 5) {
+            yVel = 5;
+        }
 
-       var plx = this.x;
-       var prx = this.x + 15;
-       var pty = this.y;
-       var pby = this.y + 24;
-       var clx = cX * 16;
-       var crx = cX * 16 + 16;
-       var cty = cY * 16;
-       var cby = cY * 16 + 16;
-       if ((plx > clx && plx < crx) || (prx > clx && prx < crx)) {
-           if ((pty < cby && pty > cty) || (pby < cby && pby > cty)) {
-               return true;
-           }
-       }
-       return false;
-   },
+        // Collisions
 
-   mn.Player.prototype.setSpawn = function(r) {
-       this.x0 = r[0] * 16;
-       this.y0 = r[1] * 16;
-   },
+        // Moving Right
+        var trstx = Math.floor((x + 15) / 16);
+        var tretx = Math.floor((x + 15 + xVel) / 16);
+        var trsty = Math.floor((y) / 16);
+        var brsty = Math.floor((y + 24) / 16);
+        if (tretx > trstx) {
+            // Check every tile we could hit on the right side
+            for (var i = 0; i <= brsty - trsty; i++) {
+                if (mn.State.game.level.map[trsty + i][tretx] === color ||
+                    mn.State.game.level.map[trsty + i][tretx] === 4) {
+                    x = tretx * 16 - 16 - 1;
+                    xVel = 0;
+                }
+            }
+        }
 
-   mn.Player.prototype.respawn = function() {
-       this.drawXSize = this.spritePos[2];
-       this.drawYSize = this.spritePos[3];
-       this.x = this.x0;
-       this.y = this.y0;
-       this.xVel = 0;
-       this.yVel = 0;
-   },
+        // Moving left
+        var tlstx = Math.floor((x) / 16);
+        var blsty = Math.floor((y + 24) / 16);
+        var tletx = Math.floor((x + xVel) / 16);
+        var tlsty = Math.floor((y-1) / 16);
+        if (tletx < tlstx) {
+            // Check every tile we could hit on the left side
+            for (i = 0; i <= blsty - tlsty; i++) {
+                if (mn.State.game.level.map[tlsty + i][tletx] === color ||
+                    mn.State.game.level.map[tlsty + i][tletx] === 4) {
+                    x = tretx * 16 + 1;
+                    xVel = 0;
+                }
+            }
+        }
 
-   mn.Player.prototype.fadeOut = function(f) {
-       this.drawXSize = this.drawXSize * f;
-       this.drawYSize = this.drawYSize * f;
-       this.x = this.x + (this.drawXSize * (1 - f)) / 2;
-       this.y = this.y + (this.drawYSize * (1 - f) / 3);
-   }
+        // Moving down
+        var blety = Math.floor((y + 24 + yVel) / 16);
+        var bletx = Math.floor((x + xVel) / 16);
+        var brety = Math.floor((y + 24 + yVel) / 16);
+        var bretx = Math.floor((x + 15 + xVel) / 16);
+        if (yVel > 0) {
+            if (blety > blsty) {
+                // Check bottom left
+                if (mn.State.game.level.map[blety][bletx] === color ||
+                    mn.State.game.level.map[blety][bletx] === 4) {
+                    yVel = 0;
+                    y = blety * 16 - 25;
+                    onGround = true;
+                }
+                // Check bottom right
+                if (mn.State.game.level.map[brety][bretx] === color ||
+                    mn.State.game.level.map[brety][bretx] === 4) {
+                    y = blety * 16 - 25;
+                    yVel = 0;
+                    onGround = true;
+                }
+            }
+        }
 
-}());
+        // Moving up
+        var tlety = Math.floor((y-1 + yVel) / 16);
+        var trety = Math.floor((y-1 + yVel) / 16);
+        tretx = Math.floor((x + 15 + xVel) / 16);
+        tletx = Math.floor((x + xVel) / 16);
+        if (yVel < 0) {
+            if (tlety < tlsty) {
+                // Check top left
+                if (mn.State.game.level.map[tlety][tletx] === color ||
+                    mn.State.game.level.map[tlety][tletx] === 4) {
+                    yVel = 0;
+                    y = tlety * 16 + 16 + 1;
+                }
+                // Check top right
+                if (mn.State.game.level.map[trety][tretx] === color ||
+                    mn.State.game.level.map[trety][tretx] === 4) {
+                    yVel = 0;
+                    y = tlety * 16 + 16 + 1;
+                }
+            }
+        }
+    }
+
+    function update(inFocus) {
+        updateVelocities(inFocus);
+
+        // update the positions from the velocities
+        x += xVel;
+        if (x + 16 > 800) {
+            x = 800 - 16;
+        }
+        if (x < 0) {
+            x = 0;
+        }
+        y += yVel;
+        if (y + 25 > 592) {
+            y = 592 - 25;
+        }
+        if (y < 0) {
+            respawn();
+        }
+    }
+
+    function atExit() {
+        return mn.State.game.level.atExit(x + 8, y + 16, color);
+    }
+
+    function getTile() {
+        return [Math.floor((x + 8) / 16), Math.floor((y + 13) / 16)];
+    }
+
+    function intersects(cX, cY) {
+        var prx = x + 15;
+        var pby = y + 24;
+        var clx = cX * 16;
+        var crx = cX * 16 + 16;
+        var cty = cY * 16;
+        var cby = cY * 16 + 16;
+        if ((x > clx && x < crx) || (prx > clx && prx < crx)) {
+            if ((y < cby && y > cty) || (pby < cby && pby > cty)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function setSpawn(r) {
+        x0 = r[0] * 16;
+        y0 = r[1] * 16;
+    }
+
+    function respawn() {
+        drawXSize = spritePos[2];
+        drawYSize = spritePos[3];
+        x = x0;
+        y = y0;
+        xVel = 0;
+        yVel = 0;
+    }
+
+    function fadeOut(f) {
+        drawXSize = drawXSize * f;
+        drawYSize = drawYSize * f;
+        x = x + (drawXSize * (1 - f)) / 2;
+        y = y + (drawYSize * (1 - f) / 3);
+    }
+
+    function getColor() {
+        return color;
+    }
+
+    return {
+        init: init,
+        render: render,
+        update: update,
+        setSpawn: setSpawn,
+        respawn: respawn,
+        atExit: atExit,
+        getTile: getTile,
+        intersects: intersects,
+        getColor: getColor,
+        fadeOut: fadeOut
+    }
+
+};
