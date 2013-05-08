@@ -31,7 +31,7 @@
             mn.State.currentState.update();
         },
 
-        completedLevel: function() {
+        returnToMenu: function() {
             this.currentState.exit();
             this.currentState = this.menu;
             this.currentState.enter();

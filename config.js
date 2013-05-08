@@ -46,6 +46,7 @@ var mn = mn || {};
             Gamepad.KeyboardMapping.Y = 32;     // space to change player
             Gamepad.KeyboardMapping.DL = 37;    // left arrow to go left
             Gamepad.KeyboardMapping.DR = 39;    // right arrow to go right
+            Gamepad.KeyboardMapping.Start = 77; // 'm' key to return to menu
         }
 
     };

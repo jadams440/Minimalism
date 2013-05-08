@@ -62,6 +62,9 @@
                     }
                     this.colorChanges = 0;
                 }
+                if (Gamepad.In.onDown.Start) {
+                    mn.State.returnToMenu();
+                }
                 if (Gamepad.In.onDown.RB || Gamepad.In.onDown.Y) {
                     this.changeFocus();
                 }
@@ -109,7 +112,7 @@
             } else if (this.success) {
                 this.successTimer -= mn.settings.interval;
                 if (this.successTimer <= 0) {
-                    mn.State.completedLevel();
+                    mn.State.returnToMenu();
                 } else {
                     for (i = 0; i < this.players.length; i++) {
                         var f = Math.sqrt(this.successTimer / this.successTime);
