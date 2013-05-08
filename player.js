@@ -1,4 +1,4 @@
-mn.Player = function () {
+mn.Player = function() {
 
     var color = 0,
         x = 0,
@@ -82,8 +82,8 @@ mn.Player = function () {
         if (tretx > trstx) {
             // Check every tile we could hit on the right side
             for (var i = 0; i <= brsty - trsty; i++) {
-                if (mn.State.game.level.map[trsty + i][tretx] === color ||
-                    mn.State.game.level.map[trsty + i][tretx] === 4) {
+                if (mn.State.game.level.getMap()[trsty + i][tretx] === color ||
+                    mn.State.game.level.getMap()[trsty + i][tretx] === 4) {
                     x = tretx * 16 - 16 - 1;
                     xVel = 0;
                 }
@@ -98,8 +98,8 @@ mn.Player = function () {
         if (tletx < tlstx) {
             // Check every tile we could hit on the left side
             for (i = 0; i <= blsty - tlsty; i++) {
-                if (mn.State.game.level.map[tlsty + i][tletx] === color ||
-                    mn.State.game.level.map[tlsty + i][tletx] === 4) {
+                if (mn.State.game.level.getMap()[tlsty + i][tletx] === color ||
+                    mn.State.game.level.getMap()[tlsty + i][tletx] === 4) {
                     x = tretx * 16 + 1;
                     xVel = 0;
                 }
@@ -114,15 +114,15 @@ mn.Player = function () {
         if (yVel > 0) {
             if (blety > blsty) {
                 // Check bottom left
-                if (mn.State.game.level.map[blety][bletx] === color ||
-                    mn.State.game.level.map[blety][bletx] === 4) {
+                if (mn.State.game.level.getMap()[blety][bletx] === color ||
+                    mn.State.game.level.getMap()[blety][bletx] === 4) {
                     yVel = 0;
                     y = blety * 16 - 25;
                     onGround = true;
                 }
                 // Check bottom right
-                if (mn.State.game.level.map[brety][bretx] === color ||
-                    mn.State.game.level.map[brety][bretx] === 4) {
+                if (mn.State.game.level.getMap()[brety][bretx] === color ||
+                    mn.State.game.level.getMap()[brety][bretx] === 4) {
                     y = blety * 16 - 25;
                     yVel = 0;
                     onGround = true;
@@ -138,14 +138,14 @@ mn.Player = function () {
         if (yVel < 0) {
             if (tlety < tlsty) {
                 // Check top left
-                if (mn.State.game.level.map[tlety][tletx] === color ||
-                    mn.State.game.level.map[tlety][tletx] === 4) {
+                if (mn.State.game.level.getMap()[tlety][tletx] === color ||
+                    mn.State.game.level.getMap()[tlety][tletx] === 4) {
                     yVel = 0;
                     y = tlety * 16 + 16 + 1;
                 }
                 // Check top right
-                if (mn.State.game.level.map[trety][tretx] === color ||
-                    mn.State.game.level.map[trety][tretx] === 4) {
+                if (mn.State.game.level.getMap()[trety][tretx] === color ||
+                    mn.State.game.level.getMap()[trety][tretx] === 4) {
                     yVel = 0;
                     y = tlety * 16 + 16 + 1;
                 }

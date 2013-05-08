@@ -2,7 +2,7 @@
 
     mn.gameState = {
 
-        level: mn.level,
+        level: mn.level(),
         players: [],
         playerFocus: [],
         focussedPlayer: null,
@@ -57,7 +57,7 @@
                 if (Gamepad.In.onDown.Back) {
                     this.level.resetLevel();
                     for (var i = 0; i < this.players.length; i++) {
-                        this.players[i].setSpawn(this.level.spawns[i]);
+                        this.players[i].setSpawn(this.level.getSpawns()[i]);
                         this.players[i].respawn();
                     }
                     this.colorChanges = 0;
@@ -83,26 +83,26 @@
                 // Are all the players at their exits
                 if (this.players[0].atExit() && this.players[1].atExit() && this.players[2].atExit()) {
                     this.success = true;
-                    localStorage.setItem(this.level.n.toString() + ".completed", "1");
-                    if (this.colorChanges < localStorage.getItem(this.level.n.toString() + ".changes") ||
-                        localStorage.getItem(this.level.n.toString() + ".changes") === null) {
-                        localStorage.setItem(this.level.n.toString() + ".changes",
+                    localStorage.setItem(this.level.getN().toString() + ".completed", "1");
+                    if (this.colorChanges < localStorage.getItem(this.level.getN().toString() + ".changes") ||
+                        localStorage.getItem(this.level.getN().toString() + ".changes") === null) {
+                        localStorage.setItem(this.level.getN().toString() + ".changes",
                                              this.colorChanges.toString());
                     }
                     var remColors = [0,0,0];
-                    for (var y = 0; y < this.level.map.length; y++) {
-                        for (var x = 0; x < this.level.map[0].length; x++) {
+                    for (var y = 0; y < this.level.getMap().length; y++) {
+                        for (var x = 0; x < this.level.getMap()[0].length; x++) {
                             for (i = 0; i < 3; i++) {
-                                if (this.level.map[y][x] === i) {
+                                if (this.level.getMap()[y][x] === i) {
                                     remColors[i] = 1;
                                 }
                             }
                         }
                     }
                     this.remainingColors = remColors[0] + remColors[1] + remColors[2];
-                    if (this.remainingColors < localStorage.getItem(this.level.n.toString() + ".colors") ||
-                        localStorage.getItem(this.level.n.toString() + ".colors") === null) {
-                            localStorage.setItem(this.level.n.toString() + ".colors",
+                    if (this.remainingColors < localStorage.getItem(this.level.getN().toString() + ".colors") ||
+                        localStorage.getItem(this.level.getN().toString() + ".colors") === null) {
+                            localStorage.setItem(this.level.getN().toString() + ".colors",
                                                  this.remainingColors.toString());
                     }
                     this.playerFocus[0] = false;
@@ -141,7 +141,7 @@
         loadLevel: function(n) {
             this.level.loadMap(n);
             for (var i = 0; i < this.players.length; i++) {
-                this.players[i].setSpawn(this.level.spawns[i]);
+                this.players[i].setSpawn(this.level.getSpawns()[i]);
                 this.players[i].respawn();
             }
             this.successTimer = this.successTime;

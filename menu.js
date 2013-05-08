@@ -65,7 +65,6 @@ mn.menuState = function() {
             );
 
             // Level Details
-            var highlightedLevel = cursorX + cursorY * 4;
             if (localStorage.getItem(i.toString() + ".colors") !== "1") {
                 mn.settings.ctx.fillStyle = "white";
                 mn.settings.ctx.fillRect(365 + x * 100,
