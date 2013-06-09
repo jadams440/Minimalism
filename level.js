@@ -58,20 +58,20 @@ mn.level = function() {
 
         // Exit doors
         doors = [];
-        var newDoor = new mn.Door(mn.maps[n].exit0[0] * 16,
-                                  (mn.maps[n].exit0[1] - 1) * 16,
-                                  0);
-        newDoor.init();
+        var newDoor = new mn.Door();
+        newDoor.init(mn.maps[n].exit0[0] * 16,
+                     (mn.maps[n].exit0[1] - 1) * 16,
+                     0);
         doors.push(newDoor);
-        newDoor = new mn.Door(mn.maps[n].exit1[0] * 16,
-                              (mn.maps[n].exit1[1] - 1) * 16,
-                              1);
-        newDoor.init();
+        newDoor = new mn.Door();
+        newDoor.init(mn.maps[n].exit1[0] * 16,
+                     (mn.maps[n].exit1[1] - 1) * 16,
+                     1);
         doors.push(newDoor);
-        newDoor = new mn.Door(mn.maps[n].exit2[0] * 16,
-                              (mn.maps[n].exit2[1] - 1) * 16,
-                              2);
-        newDoor.init();
+        newDoor = new mn.Door();
+        newDoor.init(mn.maps[n].exit2[0] * 16,
+                     (mn.maps[n].exit2[1] - 1) * 16,
+                     2);
         doors.push(newDoor);
 
         // Spawn points for each color

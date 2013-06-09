@@ -1,42 +1,47 @@
-(function () {
+mn.Door = function() {
 
-    mn.Door = function(x, y, c) {
-        this.color = c;
-        this.x = x;
-        this.y = y;
-        this.spritePos = null;
-        this.sprite = null;
-    };
+    var color = 4,
+        x = 0,
+        y = 0,
+        spritePos = null,
+        sprite = null,
+        xPos = 0,
+        yPos = 0;
 
-    mn.Door.prototype.init = function() {
-        this.sprite = mn.settings.sprites[3];
-        this.spritePos = [0, 32 * this.color, 16, 32];
-    };
-
-    mn.Door.prototype.render = function() {
-        var xPos = this.x;
-        var yPos = this.y;
-        mn.settings.ctx.drawImage(this.sprite,
-                                  this.spritePos[0],
-                                  this.spritePos[1],
-                                  this.spritePos[2],
-                                  this.spritePos[3],
-                                  xPos,
-                                  yPos,
-                                  this.spritePos[2],
-                                  this.spritePos[3]
-        );
-    };
-
-    mn.Door.prototype.atExit = function(x, y, c) {
-        if (c != this.color) {
-            return false;
-        }
-        var lx = this.x;
-        var rx = this.x + 16;
-        var ty = this.y;
-        var by = this.y + 32;
-        return (x > lx && x < rx) && (y < by && y > ty);
+    function init(x0, y0, c) {
+        color = c;
+        x = x0;
+        y = y0;
+        spritePos = [0, 32 * color, 16, 32];
+        sprite = mn.settings.sprites[3];
     }
 
-}());
+    function render() {
+        xPos = x;
+        yPos = y;
+        mn.settings.ctx.drawImage(sprite,
+                                  spritePos[0],
+                                  spritePos[1],
+                                  spritePos[2],
+                                  spritePos[3],
+                                  xPos,
+                                  yPos,
+                                  spritePos[2],
+                                  spritePos[3]
+        );
+    }
+
+    function atExit(x1, y1, c) {
+        if (c != color) {
+            return false;
+        }
+        return (x1 > x && x1 < x + 16) && (y1 < y + 32 && y1 > y);
+    }
+
+    return {
+        init: init,
+        render: render,
+        atExit: atExit
+    }
+
+};
