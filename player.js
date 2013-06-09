@@ -112,7 +112,11 @@ mn.Player = function() {
         var brety = Math.floor((y + 24 + yVel) / 16);
         var bretx = Math.floor((x + 15 + xVel) / 16);
         if (yVel > 0) {
-            if (blety > blsty) {
+            if (blety > 36) {
+                yVel = 0;
+                y = blety * 16 - 25;
+            }
+            else if (blety > blsty) {
                 // Check bottom left
                 if (mn.State.game.level.getMap()[blety][bletx] === color ||
                     mn.State.game.level.getMap()[blety][bletx] === 4) {
@@ -165,11 +169,11 @@ mn.Player = function() {
             x = 0;
         }
         y += yVel;
-        if (y + 25 > 592) {
-            y = 592 - 25;
+        if (y + 25 >= 592) {
+            respawn();
         }
         if (y < 0) {
-            respawn();
+            y = 0;
         }
     }
 
