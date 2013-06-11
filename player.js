@@ -84,7 +84,7 @@ mn.Player = function() {
             for (var i = 0; i <= brsty - trsty; i++) {
                 if (mn.State.game.level.getMap()[trsty + i][tretx] === color ||
                     mn.State.game.level.getMap()[trsty + i][tretx] === 4) {
-                    x = tretx * 16 - 16 - 1;
+                    x = tretx * 16 - 16;
                     xVel = 0;
                 }
             }
@@ -100,7 +100,7 @@ mn.Player = function() {
             for (i = 0; i <= blsty - tlsty; i++) {
                 if (mn.State.game.level.getMap()[tlsty + i][tletx] === color ||
                     mn.State.game.level.getMap()[tlsty + i][tletx] === 4) {
-                    x = tretx * 16 + 1;
+                    x = tretx * 16;
                     xVel = 0;
                 }
             }
